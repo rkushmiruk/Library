@@ -12,8 +12,17 @@ public class Author {
     private String country;
     private Set<Book> books;
 
+    public Author(String name, String surname, String country) {
+        this.name = name;
+        this.surname = surname;
+        this.country = country;
+    }
+
+    public Author() {
+    }
+
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "author_id")
     public Long getId() {
         return id;

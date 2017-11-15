@@ -19,7 +19,7 @@ CREATE TABLE `author` (
   `country` varchar(100) NOT NULL,
   PRIMARY KEY (`author_id`),
   CONSTRAINT `book_author_ibfk_2` FOREIGN KEY (`author_id`)
-  REFERENCES `book_author` (`author_id`) ON DELETE NO ACTION
+  REFERENCES `book_author` (`author_id`) ON DELETE CASCADE
 );
 
 --
@@ -118,11 +118,11 @@ CREATE TABLE `book_order` (
   `librarian_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`order_id`),
   CONSTRAINT `book_order_ibfk_1` FOREIGN KEY (`book_instance_id`)
-  REFERENCES `book_instance` (`book_instance_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  REFERENCES `book_instance` (`book_instance_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `book_order_ibfk_2` FOREIGN KEY (`reader_id`)
-  REFERENCES `reader` (`reader_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  REFERENCES `reader` (`reader_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `book_order_ibfk_3` FOREIGN KEY (`librarian_id`)
-  REFERENCES `librarian` (`librarian_id`) ON DELETE NO ACTION ON UPDATE CASCADE
+  REFERENCES `librarian` (`librarian_id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 
