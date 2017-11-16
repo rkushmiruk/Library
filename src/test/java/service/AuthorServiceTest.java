@@ -4,6 +4,7 @@ import com.ateam.entity.Author;
 import com.ateam.repository.AuthorRepository;
 import com.ateam.service.AuthorService;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,26 +37,27 @@ public class AuthorServiceTest {
 
     @Test
     public void getAllAuthorsTest() {
-        Author author = new Author("Roman","Kushmyrul","Ukraine");
+        Author author = new Author("Roman", "Kushmyrul", "Ukraine");
         List<Author> authors = new ArrayList<>();
         authors.add(authorService.save(author));
         authors.add(authorService.save(author));
         authors.add(authorService.save(author));
 
-        Author otherAuthor = new Author("Dima","Chaliy","Estonia");
+        Author otherAuthor = new Author("Dima", "Chaliy", "Estonia");
         authors.add(authorService.save(otherAuthor));
 
-        System.out.println(authorRepository.findAll());
         when(authorRepository.findAll()).thenReturn(authors);
+        List<Author> result = Lists.newArrayList(authorRepository.findAll());
         verify(authorRepository, atLeastOnce()).findAll();
-        Iterable<Author> result = authorRepository.findAll();
-        long count = 0;
-        for (Author item: result) {
-            count++;
-        }
 
         long expectedValue = 4L;
-        System.out.println(count);
-        assertThat(expectedValue, is(count));
+        long actualValue = result.size();
+        assertThat(expectedValue, is(actualValue));
+    }
+
+    @Test(expected = org.springframework.dao.DataIntegrityViolationException.class)
+    public void saveNullAuthor() {
+        Author author = new Author();
+        authorService.save(author);
     }
 }
