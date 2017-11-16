@@ -1,8 +1,10 @@
 package service;
 
+import com.ateam.entity.Book;
 import com.ateam.repository.BookRepository;
 import com.ateam.service.BookService;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
@@ -19,10 +21,16 @@ public class BookTest {
     BookRepository bookRepository;
 
     @Autowired
-    BookService authorService;
+    BookService bookService;
 
     @Before
     public void init() {
         bookRepository = mock(BookRepository.class);
+    }
+
+    @Test(expected = org.springframework.orm.jpa.JpaSystemException.class)
+    public void saveNullAuthor() {
+        Book book = new Book();
+        bookService.save(book);
     }
 }
