@@ -10,6 +10,7 @@
 
     <properties>
         <spring.version>4.3.6.RELEASE</spring.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <build>
@@ -20,6 +21,48 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>2.17</version>
+                <executions>
+                    <execution>
+                        <id>compile</id>
+                        <phase>compile</phase>
+                        <configuration>
+                            <configLocation>src/main/resources/config/checkstyle/checkstyle.xml</configLocation>
+                            <encoding>UTF-8</encoding>
+                            <consoleOutput>true</consoleOutput>
+                            <failsOnError>true</failsOnError>
+                        </configuration>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <skip>false</skip>
+                   <rulesets>
+                        <ruleset>src/main/resources/config/pmd/pmd-ruleset.xml</ruleset>
+                    </rulesets>
+                    <linkXref>true</linkXref>
+                    <failOnViolation>true</failOnViolation>
+                    <executions>
+                        <execution>
+                            <id>compile</id>
+                            <phase>compile</phase>
+                            <goals>
+                                <goal>check</goal>
+                                <goal>cpd-check</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                 </configuration>
             </plugin>
         </plugins>

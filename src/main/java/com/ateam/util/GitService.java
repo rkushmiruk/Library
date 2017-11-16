@@ -6,9 +6,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class GitService {
+public final class GitService {
     private static final Logger LOGGER = Logger.getLogger(GitService.class);
     private static final String GIT_DESCRIBE_ABBREV_0_TAGS = "git describe --abbrev=0 --tags";
+
+    private GitService() {
+
+    }
 
     public static String getGitTagVersion() {
         try {
@@ -16,7 +20,7 @@ public class GitService {
             BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
 
             return input.readLine();
-        } catch (IOException e) {
+        } catch (final IOException ex) {
             throw new RuntimeException();
         }
     }

@@ -1,10 +1,16 @@
 package com.ateam.entity;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.GenerationType;
+import javax.persistence.Column;
 
 @Entity
 @Table(name = "book_instance")
 public class BookInstance {
+    private static final int SIMPLE_NUMBER = 31;
     private Long id;
     private String inventoryNumber;
     private String status;
@@ -51,34 +57,35 @@ public class BookInstance {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         BookInstance that = (BookInstance) o;
 
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (inventoryNumber != null ? !inventoryNumber.equals(that.inventoryNumber) : that.inventoryNumber != null)
-            return false;
-        if (status != null ? !status.equals(that.status) : that.status != null) return false;
         return bookId != null ? bookId.equals(that.bookId) : that.bookId == null;
     }
 
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (inventoryNumber != null ? inventoryNumber.hashCode() : 0);
-        result = 31 * result + (status != null ? status.hashCode() : 0);
-        result = 31 * result + (bookId != null ? bookId.hashCode() : 0);
+        result = SIMPLE_NUMBER * result + (inventoryNumber != null ? inventoryNumber.hashCode() : 0);
+        result = SIMPLE_NUMBER * result + (status != null ? status.hashCode() : 0);
+        result = SIMPLE_NUMBER * result + (bookId != null ? bookId.hashCode() : 0);
         return result;
     }
 
     @Override
     public String toString() {
-        return "BookInstance{" +
-                "id=" + id +
-                ", inventoryNumber='" + inventoryNumber + '\'' +
-                ", status='" + status + '\'' +
-                ", bookId=" + bookId +
-                '}';
+        final StringBuilder sb = new StringBuilder("BookInstance{");
+        sb.append("id=").append(id);
+        sb.append(", inventoryNumber='").append(inventoryNumber).append('\'');
+        sb.append(", status='").append(status).append('\'');
+        sb.append(", bookId=").append(bookId);
+        sb.append('}');
+        return sb.toString();
     }
 }

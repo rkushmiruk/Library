@@ -1,10 +1,16 @@
 package com.ateam.entity;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.GenerationType;
+import javax.persistence.Column;
 
 @Entity
 @Table(name = "users")
 public class User {
+    private static final int SIMPLE_NUMBER = 31;
     private Long id;
     private String email;
     private String password;
@@ -12,7 +18,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "")
+    @Column(name = "user_id")
     public Long getId() {
         return id;
     }
@@ -50,33 +56,35 @@ public class User {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         User user = (User) o;
 
-        if (id != null ? !id.equals(user.id) : user.id != null) return false;
-        if (email != null ? !email.equals(user.email) : user.email != null) return false;
-        if (password != null ? !password.equals(user.password) : user.password != null) return false;
         return role == user.role;
     }
 
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (role != null ? role.hashCode() : 0);
+        result = SIMPLE_NUMBER * result + (email != null ? email.hashCode() : 0);
+        result = SIMPLE_NUMBER * result + (password != null ? password.hashCode() : 0);
+        result = SIMPLE_NUMBER * result + (role != null ? role.hashCode() : 0);
         return result;
     }
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", role=" + role +
-                '}';
+        final StringBuilder sb = new StringBuilder("User{");
+        sb.append("id=").append(id);
+        sb.append(", email='").append(email).append('\'');
+        sb.append(", password='").append(password).append('\'');
+        sb.append(", role=").append(role);
+        sb.append('}');
+        return sb.toString();
     }
 }
