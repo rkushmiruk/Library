@@ -18,7 +18,6 @@ import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -59,5 +58,13 @@ public class AuthorServiceTest {
     public void saveNullAuthor() {
         Author author = new Author();
         authorService.save(author);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void MaxAuthorNameLengthTest() {
+        String name = "amdsmdasmdmasdmasmdasmdmasdmasmdamdmasmdasmasmdma" +
+                "admadmasmdamdamdmamdamdammadmasmdmadmamdamdamsdamdmamdamma";
+
+        authorService.save(new Author(name, "Surname", "Country"));
     }
 }

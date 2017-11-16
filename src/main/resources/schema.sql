@@ -14,7 +14,7 @@ CREATE TABLE `book_author` (
 
 CREATE TABLE `author` (
   `author_id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
+  `name` varchar(20) NOT NULL,
   `surname` varchar(100) NOT NULL,
   `country` varchar(100) NOT NULL,
   PRIMARY KEY (`author_id`),

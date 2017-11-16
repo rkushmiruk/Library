@@ -3,7 +3,9 @@ package com.ateam.service.impl;
 import com.ateam.entity.BookInstance;
 import com.ateam.repository.BookInstanceRepository;
 import com.ateam.service.BookInstanceService;
+import com.ateam.util.GitService;
 import com.google.common.collect.Lists;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -13,7 +15,7 @@ import java.util.List;
 
 @Service("bookInstanceService")
 @Transactional
-public class BookInstanceServiceImpl implements BookInstanceService {
+public class BookInstanceServiceImpl implements BookInstanceService, InitializingBean {
     @Autowired
     private BookInstanceRepository bookInstanceRepository;
 
@@ -39,5 +41,10 @@ public class BookInstanceServiceImpl implements BookInstanceService {
     @Transactional(propagation = Propagation.NEVER)
     public void delete(BookInstance bookInstance) {
         bookInstanceRepository.delete(bookInstance);
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        GitService.logGitTagVersion();
     }
 }

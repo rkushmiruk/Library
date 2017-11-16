@@ -3,7 +3,9 @@ package com.ateam.service.impl;
 import com.ateam.entity.Book;
 import com.ateam.repository.BookRepository;
 import com.ateam.service.BookService;
+import com.ateam.util.GitService;
 import com.google.common.collect.Lists;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -13,7 +15,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class BookServiceImpl implements BookService {
+public class BookServiceImpl implements BookService, InitializingBean {
     @Autowired
     private BookRepository bookRepository;
 
@@ -45,5 +47,10 @@ public class BookServiceImpl implements BookService {
     @Transactional(readOnly = true)
     public Long countAll() {
         return bookRepository.countAllBooks();
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        GitService.logGitTagVersion();
     }
 }
