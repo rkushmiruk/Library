@@ -3,7 +3,6 @@ package service;
 import com.ateam.entity.Author;
 import com.ateam.repository.AuthorRepository;
 import com.ateam.service.AuthorService;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,7 +22,7 @@ import static org.mockito.Mockito.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 @ContextConfiguration("META-INF/spring/app-context-xml.xml")
-public class AuthorServiceTest {
+public class AuthorTest {
     AuthorRepository authorRepository;
 
     @Autowired
