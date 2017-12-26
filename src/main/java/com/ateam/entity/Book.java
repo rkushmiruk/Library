@@ -9,11 +9,13 @@ import javax.persistence.Column;
 import javax.persistence.ManyToMany;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
+
 import java.util.Set;
 
 @Entity
 @Table(name = "book")
 public class Book {
+
     private static final int SIMPLE_NUMBER = 31;
     private Long id;
     private String isbn;
@@ -22,8 +24,20 @@ public class Book {
     private String availability;
     private Set<Author> authors;
 
+    public Book(final String isbn, final String title, final String publisher,
+        final String availability) {
+        this.isbn = isbn;
+        this.title = title;
+        this.publisher = publisher;
+        this.availability = availability;
+    }
+
+    public Book() {
+
+    }
+
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "book_id")
     public Long getId() {
         return id;
@@ -71,8 +85,8 @@ public class Book {
 
     @ManyToMany
     @JoinTable(name = "book_author",
-            joinColumns = @JoinColumn(name = "book_id"),
-            inverseJoinColumns = @JoinColumn(name = "author_id"))
+        joinColumns = @JoinColumn(name = "book_id"),
+        inverseJoinColumns = @JoinColumn(name = "author_id"))
     public Set<Author> getAuthors() {
         return authors;
     }
