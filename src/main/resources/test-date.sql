@@ -20,3 +20,7 @@ INSERT INTO Author (name,surname,country) VALUES
 INSERT INTO Author (name,surname,country) VALUES
 ('John','Smith','USA');
 
+
+INSERT INTO Users (email,password,role) VALUES
+('Ramon2@meta.ua', 'Fear', 1)
+

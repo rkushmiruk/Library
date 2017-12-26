@@ -1,6 +1,8 @@
 package com.ateam.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -46,6 +48,7 @@ public class User {
     }
 
     @Column(name = "role")
+    @Enumerated(EnumType.ORDINAL)
     public Role getRole() {
         return role;
     }
