@@ -13,22 +13,22 @@ public class BookInstance {
 
     private static final int SIMPLE_NUMBER = 31;
     private Long id;
+    private Long bookId;
     private String inventoryNumber;
     private String status;
-    private Long bookId;
 
     public BookInstance() {
 
     }
 
-    public BookInstance(final String inventoryNumber, final String status, final Long bookId) {
+    public BookInstance(final Long bookId, final String inventoryNumber, final String status) {
+        this.bookId = bookId;
         this.inventoryNumber = inventoryNumber;
         this.status = status;
-        this.bookId = bookId;
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "book_instance_id")
     public Long getId() {
         return id;
@@ -56,7 +56,7 @@ public class BookInstance {
         this.status = status;
     }
 
-    @Column(name = "id_book")
+    @Column(name = "book_id")
     public Long getBookId() {
         return bookId;
     }
