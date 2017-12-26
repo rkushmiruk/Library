@@ -53,20 +53,6 @@ public class BookDto {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if ((obj == null) || (getClass() != obj.getClass())) {
-            return false;
-        }
-
-        BookDto book = (BookDto) obj;
-
-        return ((isbn != null) ? isbn.equals(book.isbn) : book.isbn == null);
-    }
-
-    @Override
     public String toString() {
         StringBuilder builder2 = new StringBuilder();
         builder2.append("BookDto [ [super: ").append(super.toString()).append("], isbn=").append(isbn)

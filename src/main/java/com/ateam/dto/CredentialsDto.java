@@ -39,23 +39,6 @@ public class CredentialsDto {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if ((obj == null) || (getClass() != obj.getClass())) {
-            return false;
-        }
-
-        CredentialsDto user = (CredentialsDto) obj;
-
-        if ((email != null) ? !email.equals(user.email) : user.email != null) {
-            return false;
-        }
-        return ((password != null) ? password.equals(user.password) : user.password == null);
-    }
-
-    @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("CredentialsDto [ [super: ").append(super.toString()).append("], email=").append(email)

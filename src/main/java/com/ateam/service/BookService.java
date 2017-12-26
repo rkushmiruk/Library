@@ -6,13 +6,14 @@ import org.springframework.retry.annotation.Retryable;
 import org.springframework.transaction.CannotCreateTransactionException;
 
 import com.ateam.entity.Book;
+import com.ateam.util.Delay;
 
 @EnableRetry
 public interface BookService extends GenericService<Book> {
     @Retryable(
         value = CannotCreateTransactionException.class,
-        backoff = @Backoff(delay = 5000,
-            maxDelay = 100000,
-            multiplier = 2))
+        backoff = @Backoff(delay = Delay.DELAY,
+            maxDelay = Delay.MAX_DELAY,
+            multiplier = Delay.MULTIPLIER))
     Long countAll();
 }
