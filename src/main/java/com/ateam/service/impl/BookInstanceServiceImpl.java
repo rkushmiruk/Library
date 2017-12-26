@@ -39,8 +39,8 @@ public class BookInstanceServiceImpl implements BookInstanceService, Initializin
 
     @Override
     @Transactional(propagation = Propagation.NEVER)
-    public void delete(BookInstance bookInstance) {
-        bookInstanceRepository.delete(bookInstance);
+    public void delete(Long id) {
+        bookInstanceRepository.delete(id);
     }
 
     @Override

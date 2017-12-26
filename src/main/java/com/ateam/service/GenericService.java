@@ -9,5 +9,5 @@ public interface GenericService<T>  {
 
     T save(T entity);
 
-    void delete(T entity);
+    void delete(Long id);
 }

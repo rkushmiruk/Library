@@ -39,8 +39,8 @@ public class BookServiceImpl implements BookService, InitializingBean {
 
     @Override
     @Transactional(propagation = Propagation.NEVER)
-    public void delete(Book entity) {
-
+    public void delete(Long id) {
+        bookRepository.delete(id);
     }
 
     @Override

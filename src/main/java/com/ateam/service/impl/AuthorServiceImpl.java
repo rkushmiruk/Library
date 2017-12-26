@@ -5,6 +5,8 @@ import com.ateam.repository.AuthorRepository;
 import com.ateam.service.AuthorService;
 import com.ateam.util.GitService;
 import com.google.common.collect.Lists;
+
+import org.hibernate.Session;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,8 +47,10 @@ public class AuthorServiceImpl implements AuthorService, InitializingBean {
     }
 
     @Override
-    public void delete(Author author) {
-        authorRepository.delete(author);
+    @Transactional(propagation = Propagation.NEVER)
+    public void delete(Long id) {
+
+        authorRepository.delete(id);
     }
 
     @Override

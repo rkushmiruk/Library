@@ -4,6 +4,7 @@ import com.ateam.entity.Author;
 import com.ateam.repository.AuthorRepository;
 import com.ateam.service.AuthorService;
 import com.google.common.collect.Lists;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 
@@ -23,6 +25,7 @@ import static org.mockito.Mockito.*;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 @ContextConfiguration("META-INF/spring/app-context-xml.xml")
 public class AuthorTest {
+
     AuthorRepository authorRepository;
 
     @Autowired
@@ -62,8 +65,25 @@ public class AuthorTest {
     @Test(expected = RuntimeException.class)
     public void MaxAuthorNameLengthTest() {
         String name = "amdsmdasmdmasdmasmdasmdmasdmasmdamdmasmdasmasmdma" +
-                "admadmasmdamdamdmamdamdammadmasmdmadmamdamdamsdamdmamdamma";
+            "admadmasmdamdamdmamdamdammadmasmdmadmamdamdamsdamdmamdamma";
 
         authorService.save(new Author(name, "Surname", "Country"));
     }
+
+    @Test
+    public void findAuthorTest() {
+        Author author = authorService.findById(1L);
+
+        assertNotNull(author);
+        assertThat(author.getName(), is("Roman"));
+        assertThat(author.getCountry(), is("Ukraine"));
+        assertThat(author.getSurname(), is("Kushmyruk"));
+    }
+
+    @Test
+    public void findAllAuthorsTest() {
+        List<Author> authorList = authorService.findAll();
+        assertThat(authorList.size(), is(3));
+    }
+
 }

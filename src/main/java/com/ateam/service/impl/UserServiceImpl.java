@@ -39,8 +39,8 @@ public class UserServiceImpl implements UserService, InitializingBean {
 
     @Override
     @Transactional(propagation = Propagation.NEVER)
-    public void delete(User entity) {
-        userRepository.delete(entity);
+    public void delete(Long id) {
+        userRepository.delete(id);
     }
 
     @Override
