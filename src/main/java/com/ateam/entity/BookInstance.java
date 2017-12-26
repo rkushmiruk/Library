@@ -10,11 +10,22 @@ import javax.persistence.Column;
 @Entity
 @Table(name = "book_instance")
 public class BookInstance {
+
     private static final int SIMPLE_NUMBER = 31;
     private Long id;
     private String inventoryNumber;
     private String status;
     private Long bookId;
+
+    public BookInstance() {
+
+    }
+
+    public BookInstance(final String inventoryNumber, final String status, final Long bookId) {
+        this.inventoryNumber = inventoryNumber;
+        this.status = status;
+        this.bookId = bookId;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

@@ -29,4 +29,11 @@ public class BookInstanceTest {
         bookInstanceService.save(bookInstance);
     }
 
+
+    @Test(expected = org.springframework.orm.jpa.JpaSystemException.class)
+    public void saveBookInstanceTest() {
+        BookInstance bookInstance = new BookInstance("1", "1", 1L);
+        bookInstanceService.save(bookInstance);
+    }
+
 }
