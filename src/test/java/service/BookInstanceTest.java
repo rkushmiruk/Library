@@ -9,7 +9,6 @@ import static org.mockito.Mockito.when;
 
 import java.util.List;
 
-import com.ateam.entity.Author;
 import com.ateam.entity.BookInstance;
 import com.ateam.repository.BookInstanceRepository;
 import com.ateam.service.BookInstanceService;
@@ -18,7 +17,6 @@ import com.google.common.collect.Lists;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
@@ -33,7 +31,7 @@ public class BookInstanceTest {
     @Autowired
     BookInstanceService bookInstanceService;
 
-    @Test(expected = org.springframework.orm.jpa.JpaSystemException.class)
+    @Test(expected = org.springframework.dao.DataIntegrityViolationException.class)
     public void saveNullAuthor() {
         BookInstance bookInstance = new BookInstance();
         bookInstanceService.save(bookInstance);
