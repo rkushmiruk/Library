@@ -6,3 +6,7 @@ open directory or open it in IDEA and
 **RUN PROJECT**: mvn test compile
 
 https://travis-ci.org/rkushmiruk/Library.svg?branch=master
+
+
+# Docker
+mvn clean install dockerfile:build -pl web
